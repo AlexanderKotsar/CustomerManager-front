@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<div class="container">
+  <div class="row ">
+    <div class="col-md-6">
+
+      <h3 *ngIf="customerIdToUpdate; else create">Update Customer for Id: {{customerIdToUpdate}}</h3>
+      <ng-template #create>
+        <h3> Add New Customer </h3>
+      </ng-template>
+
+      <form [formGroup]="customerForm" (ngSubmit)="onCustomerFormSubmit()">
+
+        <table class="table table-bordered table-hover">
+          <tr class="bg-info">
+            <td>Enter Name</td>
+            <td><input class="form-control" formControlName="name">
+               <label *ngIf="customerForm.get('name').invalid && processValidation" [ngClass] = "'error'"> Name is required. </label>
+            </td>
+          </tr>
+          <tr class="bg-info">
+            <td>Enter Phone</td>
+            <td><input class="form-control" formControlName="phone">
+               <label *ngIf="customerForm.get('phone').invalid && processValidation" [ngClass] = "'error'"> Phone is required. </label>
+            </td>
+          </tr>
+          <tr class="bg-info">
+            <td>Enter Address</td>
+            <td><input class="form-control" formControlName="address">
+               <label *ngIf="customerForm.get('address').invalid && processValidation" [ngClass] = "'error'"> Address is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button *ngIf="!customerIdToUpdate">CREATE</button>
+              <button *ngIf="customerIdToUpdate">UPDATE</button>
+              <button (click)="backToCreateCustomer()" *ngIf="customerIdToUpdate">Go Back</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+     <br/>
+
+      <!--Enter Id-->
+      <!--<input class="form-control">-->
+
+      <!--<button *ngIf="customerIdOne">Search</button>-->
+
+      <!--<h3>Customer Details</h3>-->
+      <!--<table class="table table-bordered table-hover">-->
+        <!--<tr class="bg-success">-->
+          <!--<th>Id</th>-->
+          <!--<th>Name</th>-->
+          <!--<th>Phone</th>-->
+          <!--<th>Address</th>-->
+        <!--</tr>-->
+        <!--<tr *ngFor="let customer of getOneCustomer" class="bg-warning">-->
+          <!--<td>{{customer.id}}</td>-->
+          <!--<td>{{customer.name}}</td>-->
+          <!--<td>{{customer.phone}}</td>-->
+          <!--<td>{{customer.address}}</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+
+     <div *ngIf="statusCode; else processing">
+       <div *ngIf="statusCode === 201" [ngClass] = "'success'">Customer added successfully.</div>
+       <div *ngIf="statusCode === 409" [ngClass] = "'success'">Customer already exists.</div>
+       <div *ngIf="statusCode === 200" [ngClass] = "'success'">Customer updated successfully.</div>
+       <div *ngIf="statusCode === 204" [ngClass] = "'success'">Customer deleted successfully.</div>
+       <div *ngIf="statusCode === 500" [ngClass] = "'error'">Internal Server Error.</div>
+     </div>
+
+     <ng-template #processing>
+      <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+     </ng-template>
+
+    </div>
+    <div  class="col-md-6">
+      <h3>Customers Details</h3>
+      <table class="table table-bordered table-hover">
+        <tr class="bg-success">
+          <th>Id</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let customer of allCustomers" class="bg-warning">
+          <td>{{customer.id}}</td>
+          <td>{{customer.name}}</td>
+          <td>{{customer.phone}}</td>
+          <td>{{customer.address}}</td>
+          <td><button class="btn btn-info center-block" type="button" (click)="loadCustomerToEdit(customer.id)">Edit</button> </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
