@@ -42,6 +42,16 @@ export class CustomerService {
 			   .map(this.extractData)
 			   .catch(this.handleError);
     }
+    //Fetch customer by name
+  getCustomerByName(name: string): Observable<Customer> {
+    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+    let cpParams = new URLSearchParams();
+    // cpParams.set('name', name);
+    let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
+    return this.http.get(this.allCustomersUrl + '/' + name, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
 	//Update customer
     updateCustomer(customer: Customer):Observable<number> {

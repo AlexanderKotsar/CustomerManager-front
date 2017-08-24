@@ -76,8 +76,17 @@
 
     </div>
     <div  class="col-md-6">
+      <form [formGroup]="idForm">
       <h3>Customers Details</h3>
-      <table class="table table-bordered table-hover">
+        <div class="input-group">
+        <input class="form-control" formControlName="id" placeholder="Enter name or id">
+          <span class="input-group-btn">
+          <button (click)="displayExactCustumer()" class="btn btn-primary">Search</button>
+            <button (click)="getAllCustomers()" class="btn btn-primary">Show all</button>
+
+          </span>
+        </div>
+        <table class="table table-bordered table-hover">
         <tr class="bg-success">
           <th>Id</th>
           <th>Name</th>
@@ -93,7 +102,7 @@
           <td><button class="btn btn-info center-block" type="button" (click)="loadCustomerToEdit(customer.id)">Edit</button> </td>
         </tr>
       </table>
-
+      </form>
     </div>
   </div>
 </div>

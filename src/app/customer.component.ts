@@ -13,6 +13,7 @@ export class CustomerComponent implements OnInit {
 
   //Component properties
    allCustomers: Customer[];
+   user: string;
    statusCode: number;
    requestProcessing = false;
    customerIdToUpdate = null;
@@ -25,6 +26,9 @@ export class CustomerComponent implements OnInit {
        address: new FormControl('', Validators.required)
    });
 
+  idForm = new FormGroup({
+    id: new FormControl('', Validators.required),
+  });
    //Create constructor to get service instance
    constructor(private customerService: CustomerService) {
    }
@@ -104,4 +108,31 @@ export class CustomerComponent implements OnInit {
       this.customerForm.reset();
 	  this.processValidation = false;
    }
+
+  //Get customer by id or name
+
+  displayExactCustumer() {
+    this.user = this.idForm.get('id').value.trim();
+
+    if(!isNaN(Number(this.user))){
+      this.customerService.getCustomerById(this.user)
+        .subscribe(customer => {
+          this.allCustomers = [];
+            this.allCustomers.push(customer);
+            this.idForm.reset();
+          },
+          errorCode =>  this.statusCode = errorCode);
+
+    } else {
+      this.customerService.getCustomerByName(this.user)
+        .subscribe(customer => {
+            this.allCustomers = [];
+            this.allCustomers = this.allCustomers.concat(customer);
+            this.idForm.reset();
+          },
+          errorCode =>  this.statusCode = errorCode);
+    }
+  }
 }
+
+
