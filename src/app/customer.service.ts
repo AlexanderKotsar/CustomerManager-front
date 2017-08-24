@@ -20,7 +20,6 @@ export class CustomerService {
         return this.http.get(this.allCustomersUrl)
 		   		.map(this.extractData)
 		        .catch(this.handleError);
-
     }
 
 	//Create customer
@@ -42,8 +41,9 @@ export class CustomerService {
 			   .map(this.extractData)
 			   .catch(this.handleError);
     }
-    //Fetch customer by name
-  getCustomerByName(name: string): Observable<Customer> {
+
+  //Fetch customer by name
+    getCustomerByName(name: string): Observable<Customer> {
     let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
     let cpParams = new URLSearchParams();
     // cpParams.set('name', name);

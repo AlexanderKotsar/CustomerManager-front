@@ -32,35 +32,14 @@
           </tr>
           <tr>
             <td colspan="2">
-              <button *ngIf="!customerIdToUpdate">CREATE</button>
-              <button *ngIf="customerIdToUpdate">UPDATE</button>
-              <button (click)="backToCreateCustomer()" *ngIf="customerIdToUpdate">Go Back</button>
+              <button  class="btn btn-info" *ngIf="!customerIdToUpdate">CREATE</button>
+              <button  class="btn btn-info" *ngIf="customerIdToUpdate">UPDATE</button>
+              <button  class="btn btn-info" (click)="backToCreateCustomer()" *ngIf="customerIdToUpdate">Go Back</button>
             </td>
           </tr>
         </table>
       </form>
      <br/>
-
-      <!--Enter Id-->
-      <!--<input class="form-control">-->
-
-      <!--<button *ngIf="customerIdOne">Search</button>-->
-
-      <!--<h3>Customer Details</h3>-->
-      <!--<table class="table table-bordered table-hover">-->
-        <!--<tr class="bg-success">-->
-          <!--<th>Id</th>-->
-          <!--<th>Name</th>-->
-          <!--<th>Phone</th>-->
-          <!--<th>Address</th>-->
-        <!--</tr>-->
-        <!--<tr *ngFor="let customer of getOneCustomer" class="bg-warning">-->
-          <!--<td>{{customer.id}}</td>-->
-          <!--<td>{{customer.name}}</td>-->
-          <!--<td>{{customer.phone}}</td>-->
-          <!--<td>{{customer.address}}</td>-->
-        <!--</tr>-->
-      <!--</table>-->
 
      <div *ngIf="statusCode; else processing">
        <div *ngIf="statusCode === 201" [ngClass] = "'success'">Customer added successfully.</div>
@@ -81,11 +60,11 @@
         <div class="input-group">
         <input class="form-control" formControlName="id" placeholder="Enter name or id">
           <span class="input-group-btn">
-          <button (click)="displayExactCustumer()" class="btn btn-primary">Search</button>
-            <button (click)="getAllCustomers()" class="btn btn-primary">Show all</button>
-
+          <button (click)="displayExactCustumer()" class="btn btn-info">Search</button>
+            <button (click)="getAllCustomers()" class="btn btn-info">Show all</button>
           </span>
         </div>
+        <br/>
         <table class="table table-bordered table-hover">
         <tr class="bg-success">
           <th>Id</th>

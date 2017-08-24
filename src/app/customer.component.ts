@@ -19,16 +19,16 @@ export class CustomerComponent implements OnInit {
    customerIdToUpdate = null;
    processValidation = false;
 
-    //Create form
+  //Create form
    customerForm = new FormGroup({
        name: new FormControl('', Validators.required),
        phone: new FormControl('', Validators.required),
        address: new FormControl('', Validators.required)
    });
+   idForm = new FormGroup({
+       id: new FormControl('', Validators.required),
+   });
 
-  idForm = new FormGroup({
-    id: new FormControl('', Validators.required),
-  });
    //Create constructor to get service instance
    constructor(private customerService: CustomerService) {
    }
@@ -110,8 +110,7 @@ export class CustomerComponent implements OnInit {
    }
 
   //Get customer by id or name
-
-  displayExactCustumer() {
+  displayExactCustomer() {
     this.user = this.idForm.get('id').value.trim();
 
     if(!isNaN(Number(this.user))){
