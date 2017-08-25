@@ -8,11 +8,11 @@ import { Customer } from './customer';
 export class CustomerService {
 
   //URLs for CRUD operations
-  // allCustomersUrl = "https://customermanager.herokuapp.com/customers";
-	// customerUrl = "https://customermanager.herokuapp.com/customer";
+  allCustomersUrl = "https://customermanager.herokuapp.com/customers";
+	customerUrl = "https://customermanager.herokuapp.com/customer";
 
-  allCustomersUrl = "http://localhost:8080/customers";
-	customerUrl = "http://localhost:8080/customer";
+  // allCustomersUrl = "http://localhost:8080/customers";
+	// customerUrl = "http://localhost:8080/customer";
 
   //Create constructor to get Http instance
 	constructor(private http:Http) {
