@@ -44,6 +44,7 @@
      <div *ngIf="statusCode; else processing">
        <div *ngIf="statusCode === 201" [ngClass] = "'success'">Customer added successfully.</div>
        <div *ngIf="statusCode === 409" [ngClass] = "'success'">Customer already exists.</div>
+       <div *ngIf="statusCode === 410" [ngClass] = "'success'">Customer not found.</div>
        <div *ngIf="statusCode === 200" [ngClass] = "'success'">Customer updated successfully.</div>
        <div *ngIf="statusCode === 204" [ngClass] = "'success'">Customer deleted successfully.</div>
        <div *ngIf="statusCode === 500" [ngClass] = "'error'">Internal Server Error.</div>
@@ -60,10 +61,11 @@
         <div class="input-group">
         <input class="form-control" formControlName="id" placeholder="Enter name or id">
           <span class="input-group-btn">
-          <button (click)="displayExactCustomer()" class="btn btn-info">Search</button>
+            <button (click)="displayExactCustomer()" class="btn btn-info">Search</button>
             <button (click)="getAllCustomers()" class="btn btn-info">Show all</button>
           </span>
         </div>
+        <label *ngIf="idForm.get('id').invalid && processValidation2" [ngClass] = "'error'"> Id or Name is required. </label>
         <br/>
         <table class="table table-bordered table-hover">
         <tr class="bg-success">

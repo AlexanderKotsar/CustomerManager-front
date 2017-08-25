@@ -13,11 +13,12 @@ export class CustomerComponent implements OnInit {
 
   //Component properties
    allCustomers: Customer[];
-   user: string;
+   customer: string;
    statusCode: number;
    requestProcessing = false;
    customerIdToUpdate = null;
    processValidation = false;
+   processValidation2 = false;
 
   //Create form
    customerForm = new FormGroup({
@@ -111,23 +112,30 @@ export class CustomerComponent implements OnInit {
 
   //Get customer by id or name
   displayExactCustomer() {
-    this.user = this.idForm.get('id').value.trim();
+    this.processValidation2 = true;
+    if (this.idForm.invalid) {
+      return; //Validation failed, exit from method.
+    }
 
-    if(!isNaN(Number(this.user))){
-      this.customerService.getCustomerById(this.user)
+    this.customer = this.idForm.get('id').value.trim();
+
+    if(!isNaN(Number(this.customer))){
+      this.customerService.getCustomerById(this.customer)
         .subscribe(customer => {
           this.allCustomers = [];
             this.allCustomers.push(customer);
             this.idForm.reset();
+            this.processValidation2 = false;
           },
           errorCode =>  this.statusCode = errorCode);
 
     } else {
-      this.customerService.getCustomerByName(this.user)
+      this.customerService.getCustomerByName(this.customer)
         .subscribe(customer => {
             this.allCustomers = [];
             this.allCustomers = this.allCustomers.concat(customer);
             this.idForm.reset();
+            this.processValidation2 = false;
           },
           errorCode =>  this.statusCode = errorCode);
     }

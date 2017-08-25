@@ -8,8 +8,11 @@ import { Customer } from './customer';
 export class CustomerService {
 
   //URLs for CRUD operations
-  allCustomersUrl = "https://customermanager.herokuapp.com/customers";
-	customerUrl = "https://customermanager.herokuapp.com/customer";
+  // allCustomersUrl = "https://customermanager.herokuapp.com/customers";
+	// customerUrl = "https://customermanager.herokuapp.com/customer";
+
+  allCustomersUrl = "http://localhost:8080/customers";
+	customerUrl = "http://localhost:8080/customer";
 
   //Create constructor to get Http instance
 	constructor(private http:Http) {
@@ -49,8 +52,8 @@ export class CustomerService {
     // cpParams.set('name', name);
     let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
     return this.http.get(this.allCustomersUrl + '/' + name, options)
-      .map(this.extractData)
-      .catch(this.handleError);
+          .map(this.extractData)
+          .catch(this.handleError);
   }
 
 	//Update customer
